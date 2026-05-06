@@ -37,62 +37,7 @@ const projectMarqueeItems = [
 ];
 
 // --- ÇEVİRİ SÖZLÜĞÜ (SABİT METİNLER) ---
-const translations = {
-  TR: {
-    nav: { about: "Hakkımda", skills: "Yetenekler", projects: "Projeler", contact: "İletişim ↗" },
-    hero: { explore: "Projelerimi Keşfet", subtitle: "Dijital dünyada iz bırakan çözümler" },
-    about: {
-      tag: "HAKKIMDA",
-      title: "Mantık ve Estetiğin Mükemmel Uyumu",
-      archTitle: "Sistem Mimarisi",
-      archDesc: "Güvenli ve ölçeklenebilir altyapılar",
-      uiTitle: "UI/UX Tasarım",
-      uiDesc: "Ziyaretçiyi müşteriye dönüştüren etkileşimler",
-      mobileTitle: "Mobil Uygulama Geliştirme",
-      mobileDesc: "iOS ve Android dünyasında yüksek performanslı, native ve cross-platform çözümler",
-      softwareTitle: "Yazılım Mühendisliği",
-      softwareDesc: "Karmaşık problemleri çözen, sürdürülebilir ve temiz kod prensipleriyle geliştirilen sistemler"
-    },
-    skills: { tag: "YETENEKLER", title: "Teknoloji Yığınım", noData: "[Henüz veri yok]" },
-    projects: { title: "Öne Çıkan İşlerim", inspect: "Detayları İncele →" },
-    contact: {
-      tag: "İLETİŞİM",
-      title1: "Bir fikriniz mi var?",
-      title2: "Birlikte inşa edelim",
-      desc: "Yeni bir proje başlatmak için doğrudan ulaşabilirsiniz",
-      btn: "Bize Ulaşın",
-      rights: "TÜM HAKLARI SAKLIDIR."
-    },
-    modal: { devTime: "Geliştirme Süresi:", liveSite: "Canlı Site ↗", github: "GitHub ↗" }
-  },
-  EN: {
-    nav: { about: "About", skills: "Skills", projects: "Projects", contact: "Contact ↗" },
-    hero: { explore: "Explore My Work", subtitle: "Solutions that leave a mark in the digital world" },
-    about: {
-      tag: "ABOUT ME",
-      title: "The Perfect Harmony of Logic and Aesthetics",
-      archTitle: "System Architecture",
-      archDesc: "Secure, scalable, and robust infrastructures",
-      uiTitle: "UI/UX Design",
-      uiDesc: "Interactions that turn visitors into customers",
-      mobileTitle: "Mobile App Development",
-      mobileDesc: "High-performance native and cross-platform solutions for iOS and Android",
-      softwareTitle: "Software Engineering",
-      softwareDesc: "Systems developed with sustainable and clean code principles to solve complex problems"
-    },
-    skills: { tag: "SKILLS", title: "My Tech Stack", noData: "[No data yet]" },
-    projects: { title: "Featured Work", inspect: "View Details →" },
-    contact: {
-      tag: "CONTACT",
-      title1: "Have an idea?",
-      title2: "Let's build it together",
-      desc: "You can reach out directly to start a new project",
-      btn: "Contact Us",
-      rights: "ALL RIGHTS RESERVED."
-    },
-    modal: { devTime: "Development Time:", liveSite: "Live Site ↗", github: "GitHub ↗" }
-  }
-};
+const translations = { TR: { nav: { about: "Hakkımda", skills: "Yetenekler", projects: "Projeler", contact: "İletişim ↗" }, hero: { explore: "Projelerimi Keşfet", subtitle: "Geleceği Kodla, Hayatı Tasarla" }, about: { tag: "HAKKIMDA", title: "Hayal Gücünü Koda Dönüştür", archTitle: "Sistem Mimarisi", archDesc: "Güvenli ve ölçeklenebilir altyapılar", uiTitle: "UI/UX Tasarım", uiDesc: "Ziyaretçiyi müşteriye dönüştüren etkileşimler", mobileTitle: "Mobil Uygulama Geliştirme", mobileDesc: "iOS ve Android dünyasında yüksek performanslı, native ve cross-platform çözümler", softwareTitle: "Yazılım Mühendisliği", softwareDesc: "Karmaşık problemleri çözen, sürdürülebilir ve temiz kod prensipleriyle geliştirilen sistemler" }, skills: { tag: "YETENEKLER", title: "Teknoloji Yığınım", noData: "[Henüz veri yok]" }, projects: { title: "Öne Çıkan İşlerim", inspect: "Detayları İncele →" }, contact: { tag: "İLETİŞİM", title1: "Bir fikriniz mi var?", title2: "Birlikte inşa edelim", desc: "Yeni bir proje başlatmak için doğrudan ulaşabilirsiniz", btn: "Bize Ulaşın", rights: "TÜM HAKLARI SAKLIDIR." }, modal: { devTime: "Geliştirme Süresi:", liveSite: "Canlı Site ↗", github: "GitHub ↗" } }, EN: { nav: { about: "About", skills: "Skills", projects: "Projects", contact: "Contact ↗" }, hero: { explore: "Explore My Work", subtitle: "Solutions that leave a mark in the digital world" }, about: { tag: "ABOUT ME", title: "The Perfect Harmony of Logic and Aesthetics", archTitle: "System Architecture", archDesc: "Secure, scalable, and robust infrastructures", uiTitle: "UI/UX Design", uiDesc: "Interactions that turn visitors into customers", mobileTitle: "Mobile App Development", mobileDesc: "High-performance native and cross-platform solutions for iOS and Android", softwareTitle: "Software Engineering", softwareDesc: "Systems developed with sustainable and clean code principles to solve complex problems" }, skills: { tag: "SKILLS", title: "My Tech Stack", noData: "[No data yet]" }, projects: { title: "Featured Work", inspect: "View Details →" }, contact: { tag: "CONTACT", title1: "Have an idea?", title2: "Let's build it together", desc: "You can reach out directly to start a new project", btn: "Contact Us", rights: "ALL RIGHTS RESERVED." }, modal: { devTime: "Development Time:", liveSite: "Live Site ↗", github: "GitHub ↗" } } };
 
 function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -176,7 +121,7 @@ function Home() {
       await sendMessage(contactForm);
       setContactStatus('success');
       setContactForm({ senderName: '', senderEmail: '', subject: '', content: '' });
-      
+
       // 5 saniye sonra formu otomatik sıfırla
       setTimeout(() => {
         setContactStatus(null);
@@ -273,7 +218,7 @@ function Home() {
           {/* FIX: Dil EN ise ve titleEn doluysa İngilizcesini bas, yoksa Türkçesini bas */}
           {profile?.fullName || "Yusuf Ülgen"} — {lang === 'EN' && profile?.titleEn ? profile.titleEn : (profile?.title || "Full Stack & Mobil Developer")}
         </p>
-        <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight mb-8 leading-[1.05] text-[#F8F7F9]">
+        <h1 className="text-[1.6rem] sm:text-4xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight mb-8 leading-[1.05] text-[#F8F7F9] whitespace-nowrap">
           {t.hero.subtitle}
         </h1>
         <p className="text-[#928b9c] text-lg md:text-xl max-w-2xl mb-12 leading-relaxed font-light italic">
@@ -296,7 +241,7 @@ function Home() {
       <section id="about" className="relative z-10 max-w-7xl mx-auto px-6 py-24 flex flex-col md:flex-row items-center gap-16">
         <div className="flex-1">
           <h2 className="text-xs font-mono text-[#7a7085] tracking-[0.3em] uppercase mb-6 italic font-bold">{t.about.tag}</h2>
-          <h3 className="text-3xl md:text-5xl font-extrabold tracking-tighter leading-tight mb-8 text-[#F8F7F9]">
+          <h3 className="text-[1.3rem] sm:text-3xl md:text-5xl font-extrabold tracking-tighter leading-tight mb-8 text-[#F8F7F9] whitespace-nowrap">
             {t.about.title}
           </h3>
           <p className="text-[#928b9c] text-lg leading-relaxed font-light mb-8 max-w-xl whitespace-pre-line">
@@ -547,64 +492,64 @@ function Home() {
             </p>
           </div>
           <div>
-          <div className="relative">
-            {/* FORM TABAKASI */}
-            <div className={`transition-all duration-[1200ms] ease-in-out transform ${contactStatus === 'success' ? 'opacity-0 scale-95 blur-sm pointer-events-none' : 'opacity-100 scale-100 blur-0'}`}>
-              <form onSubmit={handleContactSubmit} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+            <div className="relative">
+              {/* FORM TABAKASI */}
+              <div className={`transition-all duration-[1200ms] ease-in-out transform ${contactStatus === 'success' ? 'opacity-0 scale-95 blur-sm pointer-events-none' : 'opacity-100 scale-100 blur-0'}`}>
+                <form onSubmit={handleContactSubmit} className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <input
+                      type="text" required
+                      placeholder={lang === 'EN' ? 'Your Name' : 'Adınız Soyadınız'}
+                      className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-sm text-white outline-none focus:border-[#8b5cf6]/50 transition-all"
+                      value={contactForm.senderName}
+                      onChange={e => setContactForm({ ...contactForm, senderName: e.target.value })}
+                    />
+                    <input
+                      type="email" required
+                      placeholder={lang === 'EN' ? 'Your Email' : 'E-Posta Adresiniz'}
+                      className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-sm text-white outline-none focus:border-[#8b5cf6]/50 transition-all"
+                      value={contactForm.senderEmail}
+                      onChange={e => setContactForm({ ...contactForm, senderEmail: e.target.value })}
+                    />
+                  </div>
                   <input
                     type="text" required
-                    placeholder={lang === 'EN' ? 'Your Name' : 'Adınız Soyadınız'}
+                    placeholder={lang === 'EN' ? 'Subject' : 'Konu'}
                     className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-sm text-white outline-none focus:border-[#8b5cf6]/50 transition-all"
-                    value={contactForm.senderName}
-                    onChange={e => setContactForm({ ...contactForm, senderName: e.target.value })}
+                    value={contactForm.subject}
+                    onChange={e => setContactForm({ ...contactForm, subject: e.target.value })}
                   />
-                  <input
-                    type="email" required
-                    placeholder={lang === 'EN' ? 'Your Email' : 'E-Posta Adresiniz'}
-                    className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-sm text-white outline-none focus:border-[#8b5cf6]/50 transition-all"
-                    value={contactForm.senderEmail}
-                    onChange={e => setContactForm({ ...contactForm, senderEmail: e.target.value })}
+                  <textarea
+                    required rows={5}
+                    placeholder={lang === 'EN' ? 'Your message...' : 'Mesajınız...'}
+                    className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-sm text-white outline-none focus:border-[#8b5cf6]/50 transition-all resize-none"
+                    value={contactForm.content}
+                    onChange={e => setContactForm({ ...contactForm, content: e.target.value })}
                   />
-                </div>
-                <input
-                  type="text" required
-                  placeholder={lang === 'EN' ? 'Subject' : 'Konu'}
-                  className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-sm text-white outline-none focus:border-[#8b5cf6]/50 transition-all"
-                  value={contactForm.subject}
-                  onChange={e => setContactForm({ ...contactForm, subject: e.target.value })}
-                />
-                <textarea
-                  required rows={5}
-                  placeholder={lang === 'EN' ? 'Your message...' : 'Mesajınız...'}
-                  className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-sm text-white outline-none focus:border-[#8b5cf6]/50 transition-all resize-none"
-                  value={contactForm.content}
-                  onChange={e => setContactForm({ ...contactForm, content: e.target.value })}
-                />
-                {contactStatus === 'error' && (
-                  <p className="text-red-400 text-xs">{lang === 'EN' ? 'Something went wrong. Please try again.' : 'Bir hata oluştu. Lütfen tekrar dene.'}</p>
-                )}
-                <button
-                  type="submit" disabled={contactStatus === 'sending'}
-                  className="w-full bg-[#8b5cf6] text-white font-bold py-4 rounded-xl hover:bg-[#7c3aed] transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-                >
-                  {contactStatus === 'sending' ? (lang === 'EN' ? 'Sending...' : 'Gönderiliyor...') : (lang === 'EN' ? 'Send Message' : 'Mesajı Gönder')}
-                </button>
-              </form>
-            </div>
+                  {contactStatus === 'error' && (
+                    <p className="text-red-400 text-xs">{lang === 'EN' ? 'Something went wrong. Please try again.' : 'Bir hata oluştu. Lütfen tekrar dene.'}</p>
+                  )}
+                  <button
+                    type="submit" disabled={contactStatus === 'sending'}
+                    className="w-full bg-[#8b5cf6] text-white font-bold py-4 rounded-xl hover:bg-[#7c3aed] transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                  >
+                    {contactStatus === 'sending' ? (lang === 'EN' ? 'Sending...' : 'Gönderiliyor...') : (lang === 'EN' ? 'Send Message' : 'Mesajı Gönder')}
+                  </button>
+                </form>
+              </div>
 
-            {/* BAŞARI TABAKASI (OVERLAY) */}
-            <div className={`absolute inset-0 flex items-center justify-center transition-all duration-[1200ms] ease-in-out transform ${contactStatus === 'success' ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-105 invisible pointer-events-none'}`}>
-              <div className="bg-green-500/10 border border-green-500/20 rounded-3xl p-12 flex flex-col items-center text-center gap-4 backdrop-blur-md w-full h-full justify-center">
-                <div className="text-5xl animate-[bounce_2s_infinite]">✅</div>
-                <h4 className="text-xl font-bold text-green-400">{lang === 'EN' ? 'Message sent!' : 'Mesajın iletildi!'}</h4>
-                <p className="text-[#928b9c] text-sm">{lang === 'EN' ? 'I\'ll get back to you as soon as possible.' : 'En kısa sürede geri dönüş yapacağım.'}</p>
-                <button onClick={() => setContactStatus(null)} className="text-xs text-[#8b5cf6] hover:underline mt-2 cursor-pointer">
-                  {lang === 'EN' ? 'Send another' : 'Tekrar gönder'}
-                </button>
+              {/* BAŞARI TABAKASI (OVERLAY) */}
+              <div className={`absolute inset-0 flex items-center justify-center transition-all duration-[1200ms] ease-in-out transform ${contactStatus === 'success' ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-105 invisible pointer-events-none'}`}>
+                <div className="bg-green-500/10 border border-green-500/20 rounded-3xl p-12 flex flex-col items-center text-center gap-4 backdrop-blur-md w-full h-full justify-center">
+                  <div className="text-5xl animate-[bounce_2s_infinite]">✅</div>
+                  <h4 className="text-xl font-bold text-green-400">{lang === 'EN' ? 'Message sent!' : 'Mesajın iletildi!'}</h4>
+                  <p className="text-[#928b9c] text-sm">{lang === 'EN' ? 'I\'ll get back to you as soon as possible.' : 'En kısa sürede geri dönüş yapacağım.'}</p>
+                  <button onClick={() => setContactStatus(null)} className="text-xs text-[#8b5cf6] hover:underline mt-2 cursor-pointer">
+                    {lang === 'EN' ? 'Send another' : 'Tekrar gönder'}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
           </div>
         </div>
       </section>
