@@ -350,8 +350,8 @@ function Dashboard() {
                         </div>
                         {ed.department && <p className="text-sm text-[#928b9c]">{ed.department}</p>}
                         <p className="text-xs text-[#7a7085] mt-1">{ed.startDate}{ed.endDate ? ` — ${ed.endDate}` : ''}</p>
-                        {ed.description && <p className="text-xs text-[#928b9c] mt-2 line-clamp-2">{ed.description}</p>}
-                        {ed.descriptionEn && <p className="text-xs text-[#8b5cf6]/60 mt-1 line-clamp-1 italic">{ed.descriptionEn}</p>}
+                        {ed.description && <p className="text-xs text-[#928b9c] mt-2 line-clamp-2 whitespace-pre-line">{ed.description}</p>}
+                        {ed.descriptionEn && <p className="text-xs text-[#8b5cf6]/60 mt-1 line-clamp-1 italic whitespace-pre-line">{ed.descriptionEn}</p>}
                       </div>
                       <div className="flex gap-4 ml-4">
                         <button onClick={() => handleEditEducation(ed)} className="text-blue-500 text-xs opacity-0 group-hover:opacity-100 transition-all hover:underline">DÜZENLE</button>
@@ -384,7 +384,7 @@ function Dashboard() {
                       <button onClick={() => handleDeleteMessage(m.id)} className="text-red-500 text-xs opacity-0 group-hover:opacity-100 transition-all hover:underline">SİL</button>
                     </div>
                   </div>
-                  <p className="text-[#928b9c] text-sm leading-relaxed italic">"{m.content}"</p>
+                  <p className="text-[#928b9c] text-sm leading-relaxed italic whitespace-pre-line">"{m.content}"</p>
                 </div>
               ))
             }

@@ -368,7 +368,7 @@ function Home() {
                       {lang === 'EN' && project.titleEn ? project.titleEn : project.title}
                     </h4>
                     {/* Kart Açıklaması */}
-                    <p className="text-[#928b9c] text-sm leading-relaxed mb-8 line-clamp-3 font-light">
+                    <p className="text-[#928b9c] text-sm leading-relaxed mb-8 line-clamp-3 font-light whitespace-pre-line">
                       {lang === 'EN' && project.descriptionEn ? project.descriptionEn : project.description}
                     </p>
                     <button onClick={() => setSelectedProject({ ...project, techArray })} className="flex items-center gap-2 text-white font-medium hover:text-[#8b5cf6] transition-colors group/btn cursor-pointer">{t.projects.inspect}</button>
@@ -465,7 +465,7 @@ function Home() {
                     </span>
                   </div>
                   {(ed.description || ed.descriptionEn) && (
-                    <p className="text-[#928b9c] text-sm leading-relaxed">
+                    <p className="text-[#928b9c] text-sm leading-relaxed whitespace-pre-line">
                       {lang === 'EN' && ed.descriptionEn ? ed.descriptionEn : ed.description}
                     </p>
                   )}
