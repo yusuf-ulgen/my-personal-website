@@ -33,4 +33,10 @@ public class Project {
     
     @Column(columnDefinition = "TEXT")
     private String descriptionEn; // İngilizce Açıklama
+
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private Boolean isActive = true;
+
+    @Column(nullable = false, columnDefinition = "integer default 0")
+    private Integer orderIndex = 0;
 }

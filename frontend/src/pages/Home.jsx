@@ -6,7 +6,7 @@ import myLogo from '../assets/website_logo.png';
 // import projectWeb from '../assets/project_web.png';
 // import projectTravel from '../assets/project_travel.png';
 // import projectAi from '../assets/project_ai.png';
-import { getProjects, getSkills, getProfile, getEducations, sendMessage } from '../services/api';
+import { getActiveProjects, getSkills, getProfile, getEducations, sendMessage } from '../services/api';
 
 const technologies = [
   { name: 'HTML5', icon: 'https://cdn.simpleicons.org/html5/E34F26' },
@@ -78,7 +78,7 @@ function Home() {
     const fetchAllData = async () => {
       try {
         const [projData, skillData, profData, eduData] = await Promise.all([
-          getProjects(), getSkills(), getProfile(), getEducations()
+          getActiveProjects(), getSkills(), getProfile(), getEducations()
         ]);
         if (projData.success) setProjects(projData.data);
         if (skillData.success) setSkills(skillData.data);

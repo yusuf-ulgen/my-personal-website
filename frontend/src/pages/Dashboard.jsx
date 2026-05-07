@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  getProjects, createProject, updateProject, deleteProject,
+  getProjects, createProject, updateProject, deleteProject, toggleProjectActive, reorderProjects,
   getSkills, createSkill, deleteSkill,
   getMessages, deleteMessage,
   getProfile, saveProfile,
@@ -31,7 +31,7 @@ function Dashboard() {
 
   // --- Veri Yükleme ---
   const loadProjects = useCallback(async () => {
-    try { const d = await getProjects(); if (d.success) setProjects(d.data); } catch (e) { console.error(e); }
+    try { const d = await getProjects(); if (d.success) setProjects(d.data.sort((a, b) => (a.orderIndex || 0) - (b.orderIndex || 0))); } catch (e) { console.error(e); }
   }, []);
   const loadSkills = useCallback(async () => {
     try { const d = await getSkills(); if (d.success) setSkills(d.data); } catch (e) { console.error(e); }
@@ -81,6 +81,26 @@ function Dashboard() {
   const handleDeleteProject = async (id) => {
     if (!window.confirm('Projeyi silmek istiyor musun?')) return;
     try { await deleteProject(id); await loadProjects(); } catch (err) { alert(`Hata: ${err.message}`); }
+  };
+  const handleToggleProjectActive = async (id) => {
+    try { await toggleProjectActive(id); await loadProjects(); } catch (err) { alert(`Hata: ${err.message}`); }
+  };
+  const handleSortProjects = async () => {
+    const _projects = [...projects];
+    const draggedItemContent = _projects.splice(dragItem.current, 1)[0];
+    _projects.splice(dragOverItem.current, 0, draggedItemContent);
+    dragItem.current = null;
+    dragOverItem.current = null;
+
+    const updatedProjects = _projects.map((p, i) => ({ ...p, orderIndex: i }));
+    setProjects(updatedProjects);
+
+    const requestList = updatedProjects.map(p => ({ id: p.id, orderIndex: p.orderIndex }));
+    try {
+      await reorderProjects(requestList);
+    } catch (err) {
+      alert(`Sıralama güncellenemedi: ${err.message}`);
+    }
   };
 
   const handleAddSkill = async (e) => {
@@ -210,13 +230,25 @@ function Dashboard() {
             </div>
             <div className="lg:col-span-2 space-y-4">
               <h2 className="text-lg font-bold mb-4 italic">Projeler ({projects.length})</h2>
-              {projects.map(p => (
-                <div key={p.id} className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl flex justify-between items-center group hover:border-white/20 transition-all">
+              {projects.map((p, index) => (
+                <div key={p.id}
+                     draggable
+                     onDragStart={() => (dragItem.current = index)}
+                     onDragEnter={() => (dragOverItem.current = index)}
+                     onDragEnd={handleSortProjects}
+                     onDragOver={(e) => e.preventDefault()}
+                     className={`bg-white/[0.02] border p-6 rounded-2xl flex justify-between items-center group transition-all border-l-2 cursor-grab active:cursor-grabbing ${p.isActive !== false ? 'border-white/5 border-l-[#8b5cf6] hover:border-white/20' : 'border-red-500/10 border-l-red-500 hover:border-red-500/30'}`}>
                   <div>
-                    <h3 className="font-bold text-[#F8F7F9]">{p.title} <span className="text-[10px] text-[#8b5cf6] font-mono ml-2">{p.titleEn ? 'TR/EN' : 'TR'}</span></h3>
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="font-bold text-[#F8F7F9]">{p.title} <span className="text-[10px] text-[#8b5cf6] font-mono ml-2">{p.titleEn ? 'TR/EN' : 'TR'}</span></h3>
+                      {p.isActive === false && <span className="text-[10px] font-mono text-red-500 bg-red-500/10 px-2 py-0.5 rounded-full">Pasif</span>}
+                    </div>
                     <p className="text-xs text-[#7a7085] mt-1">{p.technologies}</p>
                   </div>
                   <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-all">
+                    <button onClick={() => handleToggleProjectActive(p.id)} className={`p-3 rounded-xl text-xs ${p.isActive !== false ? 'bg-orange-500/10 text-orange-500 hover:bg-orange-500 hover:text-white' : 'bg-green-500/10 text-green-500 hover:bg-green-500 hover:text-white'}`}>
+                      {p.isActive !== false ? 'Pasife Al' : 'Aktife Al'}
+                    </button>
                     <button onClick={() => handleEditProject(p)} className="p-3 bg-blue-500/10 text-blue-500 rounded-xl hover:bg-blue-500 hover:text-white text-xs">Düzenle</button>
                     <button onClick={() => handleDeleteProject(p.id)} className="p-3 bg-red-500/10 text-red-500 rounded-xl hover:bg-red-500 hover:text-white text-xs">Sil</button>
                   </div>

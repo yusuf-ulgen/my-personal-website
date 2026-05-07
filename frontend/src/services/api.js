@@ -76,6 +76,28 @@ export const deleteProject = async (id) => {
     return handleResponse(res);
 };
 
+export const getActiveProjects = async () => {
+    const res = await fetch(`${BASE_URL}/api/v1/projects/active`);
+    return handleResponse(res);
+};
+
+export const toggleProjectActive = async (id) => {
+    const res = await fetch(`${BASE_URL}/api/v1/projects/${id}/toggle-active`, {
+        method: 'PATCH',
+        headers: getAuthHeaders(),
+    });
+    return handleResponse(res);
+};
+
+export const reorderProjects = async (requestList) => {
+    const res = await fetch(`${BASE_URL}/api/v1/projects/reorder`, {
+        method: 'PUT',
+        headers: getAuthHeaders(),
+        body: JSON.stringify(requestList),
+    });
+    return handleResponse(res);
+};
+
 // --- SKILLS ---
 export const getSkills = async () => {
     const res = await fetch(`${BASE_URL}/api/v1/skills`);
