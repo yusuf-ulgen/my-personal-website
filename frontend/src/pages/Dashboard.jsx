@@ -18,7 +18,7 @@ function Dashboard() {
   const [educations, setEducations] = useState([]);
   const [profile, setProfile] = useState({ fullName: '', title: '', titleEn: '', bio: '', bioEn: '', email: '', githubLink: '', linkedinLink: '' });
 
-  const [newProject, setNewProject] = useState({ title: '', titleEn: '', description: '', descriptionEn: '', technologies: '', duration: '', githubUrl: '', liveUrl: '' });
+  const [newProject, setNewProject] = useState({ title: '', titleEn: '', description: '', descriptionEn: '', technologies: '', duration: '', githubUrl: '', liveUrl: '', webUrl: '', mobileUrl: '' });
   const [editingProjectId, setEditingProjectId] = useState(null);
 
   const [newSkill, setNewSkill] = useState({ name: '', category: '', orderIndex: 0 });
@@ -67,7 +67,7 @@ function Dashboard() {
         await createProject(newProject);
         alert('Proje başarıyla eklendi! ✨');
       }
-      setNewProject({ title: '', titleEn: '', description: '', descriptionEn: '', technologies: '', duration: '', githubUrl: '', liveUrl: '' });
+      setNewProject({ title: '', titleEn: '', description: '', descriptionEn: '', technologies: '', duration: '', githubUrl: '', liveUrl: '', webUrl: '', mobileUrl: '' });
       setEditingProjectId(null);
       await loadProjects();
     } catch (err) { alert(`Hata: ${err.message}`); }
@@ -219,12 +219,16 @@ function Dashboard() {
                 <input className={inputCls} placeholder="Teknolojiler (virgülle)" value={newProject.technologies} onChange={e => setNewProject({ ...newProject, technologies: e.target.value })} />
                 <input className={inputCls} placeholder="Geliştirme Süresi (Örn: 3 hafta)" value={newProject.duration || ''} onChange={e => setNewProject({ ...newProject, duration: e.target.value })} />
                 <input className={inputCls} placeholder="GitHub URL" value={newProject.githubUrl} onChange={e => setNewProject({ ...newProject, githubUrl: e.target.value })} />
-                <input className={inputCls} placeholder="Canlı Site URL" value={newProject.liveUrl} onChange={e => setNewProject({ ...newProject, liveUrl: e.target.value })} />
+                <div className="grid grid-cols-2 gap-2">
+                  <input className={inputCls} placeholder="Web Sitesi URL (Opsiyonel)" value={newProject.webUrl || ''} onChange={e => setNewProject({ ...newProject, webUrl: e.target.value })} />
+                  <input className={inputCls} placeholder="Mobil Uygulama URL (Opsiyonel)" value={newProject.mobileUrl || ''} onChange={e => setNewProject({ ...newProject, mobileUrl: e.target.value })} />
+                </div>
+                <input className={inputCls} placeholder="Eski Canlı Site URL (liveUrl)" value={newProject.liveUrl} onChange={e => setNewProject({ ...newProject, liveUrl: e.target.value })} />
                 <button type="submit" className="w-full bg-[#8b5cf6] py-4 rounded-xl font-bold hover:scale-[1.01] transition-all">
                   {editingProjectId ? 'Projeyi Güncelle' : 'Projeyi Kaydet'}
                 </button>
                 {editingProjectId && (
-                  <button type="button" onClick={() => { setEditingProjectId(null); setNewProject({ title: '', titleEn: '', description: '', descriptionEn: '', technologies: '', duration: '', githubUrl: '', liveUrl: '' }); }} className="w-full bg-white/10 py-4 rounded-xl font-bold hover:scale-[1.01] transition-all mt-2">İptal Et</button>
+                  <button type="button" onClick={() => { setEditingProjectId(null); setNewProject({ title: '', titleEn: '', description: '', descriptionEn: '', technologies: '', duration: '', githubUrl: '', liveUrl: '', webUrl: '', mobileUrl: '' }); }} className="w-full bg-white/10 py-4 rounded-xl font-bold hover:scale-[1.01] transition-all mt-2">İptal Et</button>
                 )}
               </form>
             </div>

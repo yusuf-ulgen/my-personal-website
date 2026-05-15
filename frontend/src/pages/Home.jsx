@@ -25,6 +25,8 @@ const technologies = [
   { name: 'Tailwind CSS', icon: 'https://cdn.simpleicons.org/tailwindcss/06B6D4' },
   { name: 'Node.js', icon: 'https://cdn.simpleicons.org/nodedotjs/339933' },
   { name: 'Spring Boot', icon: 'https://cdn.simpleicons.org/springboot/6DB33F' },
+  { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript/3178C6' },
+  { name: 'Expo', icon: 'https://cdn.simpleicons.org/expo/ffffff' },
   { name: 'PostgreSQL', icon: 'https://cdn.simpleicons.org/postgresql/4169E1' }
 ];
 
@@ -37,7 +39,7 @@ const projectMarqueeItems = [
 ];
 
 // --- ÇEVİRİ SÖZLÜĞÜ (SABİT METİNLER) ---
-const translations = { TR: { nav: { about: "Hakkımda", skills: "Yetenekler", projects: "Projeler", contact: "İletişim ↗" }, hero: { explore: "Projelerimi Keşfet", subtitle: "Geleceği Kodla, Hayatı Tasarla" }, about: { tag: "HAKKIMDA", title: "Hayal Gücünü Koda Dönüştür", archTitle: "Sistem Mimarisi", archDesc: "Güvenli ve ölçeklenebilir altyapılar", uiTitle: "UI/UX Tasarım", uiDesc: "Ziyaretçiyi müşteriye dönüştüren etkileşimler", mobileTitle: "Mobil Uygulama Geliştirme", mobileDesc: "iOS ve Android dünyasında yüksek performanslı, native ve cross-platform çözümler", softwareTitle: "Yazılım Mühendisliği", softwareDesc: "Karmaşık problemleri çözen, sürdürülebilir ve temiz kod prensipleriyle geliştirilen sistemler" }, skills: { tag: "YETENEKLER", title: "Teknoloji Yığınım", noData: "[Henüz veri yok]" }, projects: { title: "Öne Çıkan İşlerim", inspect: "Detayları İncele →" }, contact: { tag: "İLETİŞİM", title1: "Bir fikriniz mi var?", title2: "Birlikte inşa edelim", desc: "Yeni bir proje başlatmak için doğrudan ulaşabilirsiniz", btn: "Bize Ulaşın", rights: "TÜM HAKLARI SAKLIDIR." }, modal: { devTime: "Geliştirme Süresi:", liveSite: "Canlı Site ↗", github: "GitHub ↗" } }, EN: { nav: { about: "About", skills: "Skills", projects: "Projects", contact: "Contact ↗" }, hero: { explore: "Explore My Work", subtitle: "Solutions that leave a mark in the digital world" }, about: { tag: "ABOUT ME", title: "The Perfect Harmony of Logic and Aesthetics", archTitle: "System Architecture", archDesc: "Secure, scalable, and robust infrastructures", uiTitle: "UI/UX Design", uiDesc: "Interactions that turn visitors into customers", mobileTitle: "Mobile App Development", mobileDesc: "High-performance native and cross-platform solutions for iOS and Android", softwareTitle: "Software Engineering", softwareDesc: "Systems developed with sustainable and clean code principles to solve complex problems" }, skills: { tag: "SKILLS", title: "My Tech Stack", noData: "[No data yet]" }, projects: { title: "Featured Work", inspect: "View Details →" }, contact: { tag: "CONTACT", title1: "Have an idea?", title2: "Let's build it together", desc: "You can reach out directly to start a new project", btn: "Contact Us", rights: "ALL RIGHTS RESERVED." }, modal: { devTime: "Development Time:", liveSite: "Live Site ↗", github: "GitHub ↗" } } };
+const translations = { TR: { nav: { about: "Hakkımda", skills: "Yetenekler", projects: "Projeler", contact: "İletişim ↗" }, hero: { explore: "Projelerimi Keşfet", subtitle: "Geleceği Kodla, Hayatı Tasarla" }, about: { tag: "HAKKIMDA", title: "Hayal Gücünü Koda Dönüştür", archTitle: "Sistem Mimarisi", archDesc: "Güvenli ve ölçeklenebilir altyapılar", uiTitle: "UI/UX Tasarım", uiDesc: "Ziyaretçiyi müşteriye dönüştüren etkileşimler ve SEO/GEO performans çalışmaları", mobileTitle: "Mobil Uygulama Geliştirme", mobileDesc: "iOS ve Android dünyasında yüksek performanslı, native ve cross-platform çözümler", softwareTitle: "Yazılım Mühendisliği", softwareDesc: "Karmaşık problemleri çözen, sürdürülebilir ve temiz kod prensipleriyle geliştirilen sistemler" }, skills: { tag: "YETENEKLER", title: "Teknoloji Yığınım", noData: "[Henüz veri yok]" }, projects: { title: "Öne Çıkan İşlerim", inspect: "Detayları İncele →" }, contact: { tag: "İLETİŞİM", title1: "Bir fikriniz mi var?", title2: "Birlikte inşa edelim", desc: "Yeni bir proje başlatmak için doğrudan ulaşabilirsiniz", btn: "Bize Ulaşın", rights: "TÜM HAKLARI SAKLIDIR." }, modal: { devTime: "Geliştirme Süresi:", liveSite: "Canlı Site ↗", webSite: "Web Sitesi ↗", mobileApp: "Mobil Uygulama ↗", github: "GitHub ↗" } }, EN: { nav: { about: "About", skills: "Skills", projects: "Projects", contact: "Contact ↗" }, hero: { explore: "Explore My Work", subtitle: "Solutions that leave a mark in the digital world" }, about: { tag: "ABOUT ME", title: "The Perfect Harmony of Logic and Aesthetics", archTitle: "System Architecture", archDesc: "Secure, scalable, and robust infrastructures", uiTitle: "UI/UX Design", uiDesc: "Interactions that turn visitors into customers and SEO/GEO performance optimizations", mobileTitle: "Mobile App Development", mobileDesc: "High-performance native and cross-platform solutions for iOS and Android", softwareTitle: "Software Engineering", softwareDesc: "Systems developed with sustainable and clean code principles to solve complex problems" }, skills: { tag: "SKILLS", title: "My Tech Stack", noData: "[No data yet]" }, projects: { title: "Featured Work", inspect: "View Details →" }, contact: { tag: "CONTACT", title1: "Have an idea?", title2: "Let's build it together", desc: "You can reach out directly to start a new project", btn: "Contact Us", rights: "ALL RIGHTS RESERVED." }, modal: { devTime: "Development Time:", liveSite: "Live Site ↗", webSite: "Web Site ↗", mobileApp: "Mobile App ↗", github: "GitHub ↗" } } };
 
 function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -587,9 +589,31 @@ function Home() {
             <div className="flex flex-wrap gap-2 mb-12">
               {selectedProject.techArray.map((tech, i) => (<span key={i} className="text-xs font-medium text-[#E2DCE7] bg-white/10 border border-white/10 px-4 py-2 rounded-lg">{tech}</span>))}
             </div>
-            <div className="flex gap-4">
-              {selectedProject.liveUrl && <a href={selectedProject.liveUrl} target="_blank" rel="noreferrer" className="bg-white text-black px-8 py-3 rounded-full font-bold transition-transform hover:scale-105">{t.modal.liveSite}</a>}
-              {selectedProject.githubUrl && <a href={selectedProject.githubUrl} target="_blank" rel="noreferrer" className="bg-white/5 border border-white/10 text-white px-8 py-3 rounded-full font-bold transition-transform hover:scale-105">{t.modal.github}</a>}
+            <div className="flex flex-wrap gap-4">
+              {selectedProject.webUrl && (
+                <a href={selectedProject.webUrl} target="_blank" rel="noreferrer" className="bg-white text-black px-8 py-3 rounded-full font-bold transition-transform hover:scale-105 flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                  {t.modal.webSite}
+                </a>
+              )}
+              {selectedProject.mobileUrl && (
+                <a href={selectedProject.mobileUrl} target="_blank" rel="noreferrer" className="bg-white text-black px-8 py-3 rounded-full font-bold transition-transform hover:scale-105 flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                  {t.modal.mobileApp}
+                </a>
+              )}
+              {selectedProject.liveUrl && !selectedProject.webUrl && (
+                <a href={selectedProject.liveUrl} target="_blank" rel="noreferrer" className="bg-white text-black px-8 py-3 rounded-full font-bold transition-transform hover:scale-105 flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                  {t.modal.liveSite}
+                </a>
+              )}
+              {selectedProject.githubUrl && (
+                <a href={selectedProject.githubUrl} target="_blank" rel="noreferrer" className="bg-white/5 border border-white/10 text-white px-8 py-3 rounded-full font-bold transition-transform hover:scale-105 flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+                  {t.modal.github}
+                </a>
+              )}
             </div>
           </div>
         </div>
