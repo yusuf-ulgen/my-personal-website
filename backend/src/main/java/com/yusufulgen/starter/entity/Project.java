@@ -26,8 +26,9 @@ public class Project {
     private String duration; // Ne kadar sürede yapıldı (Örn: "2 Hafta", "3 Ay")
 
     private String githubUrl; // GitHub kaynak kod linki
-
-    private String liveUrl; // Varsa canlı site linki
+    private String liveUrl; // Varsa canlı site linki (Eski alan, uyumluluk için durabilir)
+    private String webUrl; // Web sitesi linki
+    private String mobileUrl; // Mobil uygulama linki (Play Store / App Store vb.)
 
     private String titleEn; // İngilizce Başlık
     
