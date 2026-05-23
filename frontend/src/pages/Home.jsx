@@ -695,7 +695,7 @@ function Home() {
               <h3 className="text-2xl font-extrabold text-[#F8F7F9] mb-2 tracking-tight">
                 {t.cvModal.title}
               </h3>
-              <p className="text-[#928b9c] text-xs font-light">
+              <p className="text-[#b4aac2] text-sm font-normal">
                 {t.cvModal.subtitle}
               </p>
             </div>
@@ -717,7 +717,7 @@ function Home() {
                   <h4 className="font-bold text-sm text-[#E2DCE7] group-hover:text-white transition-colors">
                     {t.cvModal.web}
                   </h4>
-                  <p className="text-[11px] text-[#7a7085] mt-0.5 font-light">
+                  <p className="text-[11px] text-[#a8a0b3] mt-0.5 font-normal group-hover:text-white/80 transition-colors">
                     {t.cvModal.webDesc}
                   </p>
                 </div>
@@ -744,7 +744,7 @@ function Home() {
                   <h4 className="font-bold text-sm text-[#E2DCE7] group-hover:text-white transition-colors">
                     {t.cvModal.mobile}
                   </h4>
-                  <p className="text-[11px] text-[#7a7085] mt-0.5 font-light">
+                  <p className="text-[11px] text-[#a8a0b3] mt-0.5 font-normal group-hover:text-white/80 transition-colors">
                     {t.cvModal.mobileDesc}
                   </p>
                 </div>
