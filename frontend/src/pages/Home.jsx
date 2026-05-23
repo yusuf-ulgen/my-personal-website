@@ -39,11 +39,12 @@ const projectMarqueeItems = [
 ];
 
 // --- ÇEVİRİ SÖZLÜĞÜ (SABİT METİNLER) ---
-const translations = { TR: { nav: { about: "Hakkımda", skills: "Yetenekler", projects: "Projeler", references: "Referanslar", contact: "İletişim ↗" }, hero: { explore: "Projelerimi Keşfet", subtitle: "Geleceği Kodla, Hayatı Tasarla" }, about: { tag: "HAKKIMDA", title: "Hayal Gücünü Koda Dönüştür", archTitle: "Sistem Mimarisi", archDesc: "Güvenli ve ölçeklenebilir altyapılar", uiTitle: "UI/UX Tasarım", uiDesc: "Ziyaretçiyi müşteriye dönüştüren etkileşimler ve SEO/GEO performans çalışmaları", mobileTitle: "Mobil Uygulama Geliştirme", mobileDesc: "iOS ve Android dünyasında yüksek performanslı, native ve cross-platform çözümler", softwareTitle: "Yazılım Mühendisliği", softwareDesc: "Karmaşık problemleri çözen, sürdürülebilir ve temiz kod prensipleriyle geliştirilen sistemler" }, skills: { tag: "YETENEKLER", title: "Teknoloji Yığınım", noData: "[Henüz veri yok]" }, projects: { title: "Öne Çıkan İşlerim", inspect: "Detayları İncele →" }, references: { tag: "REFERANSLAR", title: "Birlikte Çalıştığım İnsanlar", noData: "[Henüz referans eklenmemiş]" }, contact: { tag: "İLETİŞİM", title1: "Bir fikriniz mi var?", title2: "Birlikte inşa edelim", desc: "Yeni bir proje başlatmak için doğrudan ulaşabilirsiniz", btn: "Bize Ulaşın", rights: "TÜM HAKLARI SAKLIDIR." }, modal: { devTime: "Geliştirme Süresi:", liveSite: "Canlı Site ↗", webSite: "Web Sitesi ↗", mobileApp: "Mobil Uygulama ↗", github: "GitHub ↗" } }, EN: { nav: { about: "About", skills: "Skills", projects: "Projects", references: "References", contact: "Contact ↗" }, hero: { explore: "Explore My Work", subtitle: "Solutions that leave a mark in the digital world" }, about: { tag: "ABOUT ME", title: "The Perfect Harmony of Logic and Aesthetics", archTitle: "System Architecture", archDesc: "Secure, scalable, and robust infrastructures", uiTitle: "UI/UX Design", uiDesc: "Interactions that turn visitors into customers and SEO/GEO performance optimizations", mobileTitle: "Mobile App Development", mobileDesc: "High-performance native and cross-platform solutions for iOS and Android", softwareTitle: "Software Engineering", softwareDesc: "Systems developed with sustainable and clean code principles to solve complex problems" }, skills: { tag: "SKILLS", title: "My Tech Stack", noData: "[No data yet]" }, projects: { title: "Featured Work", inspect: "View Details →" }, references: { tag: "REFERENCES", title: "People I've Worked With", noData: "[No references yet]" }, contact: { tag: "CONTACT", title1: "Have an idea?", title2: "Let's build it together", desc: "You can reach out directly to start a new project", btn: "Contact Us", rights: "ALL RIGHTS RESERVED." }, modal: { devTime: "Development Time:", liveSite: "Live Site ↗", webSite: "Web Site ↗", mobileApp: "Mobile App ↗", github: "GitHub ↗" } } };
+const translations = { TR: { nav: { about: "Hakkımda", skills: "Yetenekler", projects: "Projeler", references: "Referanslar", contact: "İletişim ↗" }, hero: { explore: "Projelerimi Keşfet", subtitle: "Geleceği Kodla, Hayatı Tasarla" }, about: { tag: "HAKKIMDA", title: "Hayal Gücünü Koda Dönüştür", archTitle: "Sistem Mimarisi", archDesc: "Güvenli ve ölçeklenebilir altyapılar", uiTitle: "UI/UX Tasarım", uiDesc: "Ziyaretçiyi müşteriye dönüştüren etkileşimler ve SEO/GEO performans çalışmaları", mobileTitle: "Mobil Uygulama Geliştirme", mobileDesc: "iOS ve Android dünyasında yüksek performanslı, native ve cross-platform çözümler", softwareTitle: "Yazılım Mühendisliği", softwareDesc: "Karmaşık problemleri çözen, sürdürülebilir ve temiz kod prensipleriyle geliştirilen sistemler" }, skills: { tag: "YETENEKLER", title: "Teknoloji Yığınım", noData: "[Henüz veri yok]" }, projects: { title: "Öne Çıkan İşlerim", inspect: "Detayları İncele →" }, references: { tag: "REFERANSLAR", title: "Birlikte Çalıştığım İnsanlar", noData: "[Henüz referans eklenmemiş]" }, contact: { tag: "İLETİŞİM", title1: "Bir fikriniz mi var?", title2: "Birlikte inşa edelim", desc: "Yeni bir proje başlatmak için doğrudan ulaşabilirsiniz", btn: "Bize Ulaşın", rights: "TÜM HAKLARI SAKLIDIR." }, modal: { devTime: "Geliştirme Süresi:", liveSite: "Canlı Site ↗", webSite: "Web Sitesi ↗", mobileApp: "Mobil Uygulama ↗", github: "GitHub ↗" }, cvModal: { title: "CV Seçenekleri", subtitle: "Lütfen indirmek istediğiniz CV versiyonunu seçin.", mobile: "Mobil CV", mobileDesc: "Mobil cihazlar için optimize edilmiş dikey tasarım", web: "Web CV", webDesc: "Detaylı inceleme için yatay tasarım" } }, EN: { nav: { about: "About", skills: "Skills", projects: "Projects", references: "References", contact: "Contact ↗" }, hero: { explore: "Explore My Work", subtitle: "Solutions that leave a mark in the digital world" }, about: { tag: "ABOUT ME", title: "The Perfect Harmony of Logic and Aesthetics", archTitle: "System Architecture", archDesc: "Secure, scalable, and robust infrastructures", uiTitle: "UI/UX Design", uiDesc: "Interactions that turn visitors into customers and SEO/GEO performance optimizations", mobileTitle: "Mobile App Development", mobileDesc: "High-performance native and cross-platform solutions for iOS and Android", softwareTitle: "Software Engineering", softwareDesc: "Systems developed with sustainable and clean code principles to solve complex problems" }, skills: { tag: "SKILLS", title: "My Tech Stack", noData: "[No data yet]" }, projects: { title: "Featured Work", inspect: "View Details →" }, references: { tag: "REFERENCES", title: "People I've Worked With", noData: "[No references yet]" }, contact: { tag: "CONTACT", title1: "Have an idea?", title2: "Let's build it together", desc: "You can reach out directly to start a new project", btn: "Contact Us", rights: "ALL RIGHTS RESERVED." }, modal: { devTime: "Development Time:", liveSite: "Live Site ↗", webSite: "Web Site ↗", mobileApp: "Mobile App ↗", github: "GitHub ↗" }, cvModal: { title: "CV Options", subtitle: "Please select the CV version you wish to download.", mobile: "Mobile CV", mobileDesc: "Portrait design optimized for mobile devices", web: "Web CV", webDesc: "Landscape design for desktop review" } } };
 
 function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [isCvModalOpen, setIsCvModalOpen] = useState(false);
 
   const [lang, setLang] = useState('TR');
   const [isLangOpen, setIsLangOpen] = useState(false);
@@ -72,9 +73,9 @@ function Home() {
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
-    document.body.style.overflow = selectedProject ? 'hidden' : 'auto';
+    document.body.style.overflow = (selectedProject || isCvModalOpen) ? 'hidden' : 'auto';
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [selectedProject]);
+  }, [selectedProject, isCvModalOpen]);
 
   // --- Data fetching ---
   useEffect(() => {
@@ -235,10 +236,10 @@ function Home() {
           <a href="#projects" onClick={(e) => handleSmoothScroll(e, 'projects')} className="inline-flex items-center justify-center px-10 py-3.5 text-[13px] font-medium text-white border border-white/10 rounded-full hover:bg-white/5 transition-all duration-300 cursor-pointer tracking-widest uppercase">
             {t.hero.explore}
           </a>
-          <a href="/cv.pdf" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-medium text-[#8b5cf6] border border-[#8b5cf6]/30 rounded-full hover:bg-[#8b5cf6]/10 transition-all duration-300 cursor-pointer tracking-widest uppercase">
+          <button onClick={() => setIsCvModalOpen(true)} className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-medium text-[#8b5cf6] border border-[#8b5cf6]/30 rounded-full hover:bg-[#8b5cf6]/10 transition-all duration-300 cursor-pointer tracking-widest uppercase">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
             {lang === 'EN' ? 'Download CV' : 'CV İndir'}
-          </a>
+          </button>
         </div>
       </section>
 
@@ -678,6 +679,81 @@ function Home() {
                   {t.modal.github}
                 </a>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* CV DOWNLOAD MODAL */}
+      {isCvModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-[#0B0616]/80 backdrop-blur-xl cursor-pointer" onClick={() => setIsCvModalOpen(false)}></div>
+          <div className="relative w-full max-w-md bg-[#0A0510]/95 border border-white/10 rounded-3xl shadow-2xl p-8 md:p-10 backdrop-blur-md animate-[fadeInUp_0.4s_ease-out]">
+            <button onClick={() => setIsCvModalOpen(false)} className="absolute top-6 right-6 text-xl hover:rotate-90 transition-all duration-300 cursor-pointer text-[#8c8496] hover:text-white">✕</button>
+            
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-extrabold text-[#F8F7F9] mb-2 tracking-tight">
+                {t.cvModal.title}
+              </h3>
+              <p className="text-[#928b9c] text-xs font-light">
+                {t.cvModal.subtitle}
+              </p>
+            </div>
+            
+            <div className="space-y-4">
+              {/* Web CV */}
+              <a 
+                href="/cv-web.pdf" 
+                download="Yusuf_Ulgen_CV_Web.pdf"
+                onClick={() => setIsCvModalOpen(false)}
+                className="group flex items-center gap-4 p-4 bg-white/[0.02] border border-white/5 rounded-2xl hover:border-[#8b5cf6]/40 hover:bg-[#8b5cf6]/5 transition-all duration-300 cursor-pointer"
+              >
+                <div className="w-10 h-10 rounded-xl bg-[#8b5cf6]/10 border border-[#8b5cf6]/20 flex items-center justify-center text-[#8b5cf6] group-hover:scale-105 transition-transform duration-300">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div className="flex-1 text-left">
+                  <h4 className="font-bold text-sm text-[#E2DCE7] group-hover:text-white transition-colors">
+                    {t.cvModal.web}
+                  </h4>
+                  <p className="text-[11px] text-[#7a7085] mt-0.5 font-light">
+                    {t.cvModal.webDesc}
+                  </p>
+                </div>
+                <div className="text-[#8c8496] group-hover:text-[#8b5cf6] transition-colors">
+                  <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </a>
+
+              {/* Mobile CV */}
+              <a 
+                href="/cv-mobile.pdf" 
+                download="Yusuf_Ulgen_CV_Mobile.pdf"
+                onClick={() => setIsCvModalOpen(false)}
+                className="group flex items-center gap-4 p-4 bg-white/[0.02] border border-white/5 rounded-2xl hover:border-[#d946ef]/40 hover:bg-[#d946ef]/5 transition-all duration-300 cursor-pointer"
+              >
+                <div className="w-10 h-10 rounded-xl bg-[#d946ef]/10 border border-[#d946ef]/20 flex items-center justify-center text-[#d946ef] group-hover:scale-105 transition-transform duration-300">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div className="flex-1 text-left">
+                  <h4 className="font-bold text-sm text-[#E2DCE7] group-hover:text-white transition-colors">
+                    {t.cvModal.mobile}
+                  </h4>
+                  <p className="text-[11px] text-[#7a7085] mt-0.5 font-light">
+                    {t.cvModal.mobileDesc}
+                  </p>
+                </div>
+                <div className="text-[#8c8496] group-hover:text-[#d946ef] transition-colors">
+                  <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </a>
             </div>
           </div>
         </div>
