@@ -79,14 +79,14 @@ function Home() {
   useEffect(() => {
     const fetchAllData = async () => {
       try {
-        const [projData, skillData, profData, eduData] = await Promise.all([
+        const [projResult, skillResult, profResult, eduResult] = await Promise.allSettled([
           getActiveProjects(), getSkills(), getProfile(), getEducations()
         ]);
-        if (projData.success) setProjects(projData.data);
-        if (skillData.success) setSkills(skillData.data);
-        if (profData.success && profData.data.length > 0) setProfile(profData.data[0]);
-        if (eduData.success) {
-          const sortedEdu = eduData.data.sort((a, b) => (a.orderIndex || 0) - (b.orderIndex || 0));
+        if (projResult.status === 'fulfilled' && projResult.value.success) setProjects(projResult.value.data);
+        if (skillResult.status === 'fulfilled' && skillResult.value.success) setSkills(skillResult.value.data);
+        if (profResult.status === 'fulfilled' && profResult.value.success && profResult.value.data.length > 0) setProfile(profResult.value.data[0]);
+        if (eduResult.status === 'fulfilled' && eduResult.value.success) {
+          const sortedEdu = eduResult.value.data.sort((a, b) => (a.orderIndex || 0) - (b.orderIndex || 0));
           setEducations(sortedEdu);
         }
         setIsLoading(false);

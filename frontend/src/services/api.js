@@ -26,6 +26,27 @@ const handleResponse = async (res) => {
     return data;
 };
 
+// --- Retry mekanizması: Render cold start 500 hatalarını otomatik tekrar dener ---
+const fetchWithRetry = async (url, options = {}, retries = 3) => {
+    for (let i = 0; i < retries; i++) {
+        try {
+            const res = await fetch(url, options);
+            if (res.status >= 500 && i < retries - 1) {
+                // 500 hatası → kısa bekle, tekrar dene
+                await new Promise(r => setTimeout(r, 1000 * (i + 1)));
+                continue;
+            }
+            return handleResponse(res);
+        } catch (err) {
+            if (i < retries - 1) {
+                await new Promise(r => setTimeout(r, 1000 * (i + 1)));
+                continue;
+            }
+            throw err;
+        }
+    }
+};
+
 // --- AUTH ---
 export const login = async (username, password) => {
     const res = await fetch(`${BASE_URL}/api/v1/auth/login`, {
@@ -38,8 +59,7 @@ export const login = async (username, password) => {
 
 // --- PROFILE ---
 export const getProfile = async () => {
-    const res = await fetch(`${BASE_URL}/api/v1/profile`);
-    return handleResponse(res);
+    return fetchWithRetry(`${BASE_URL}/api/v1/profile`);
 };
 
 export const saveProfile = async (profile) => {
@@ -53,8 +73,7 @@ export const saveProfile = async (profile) => {
 
 // --- PROJECTS ---
 export const getProjects = async () => {
-    const res = await fetch(`${BASE_URL}/api/v1/projects`);
-    return handleResponse(res);
+    return fetchWithRetry(`${BASE_URL}/api/v1/projects`);
 };
 
 export const createProject = async (project) => {
@@ -84,8 +103,7 @@ export const deleteProject = async (id) => {
 };
 
 export const getActiveProjects = async () => {
-    const res = await fetch(`${BASE_URL}/api/v1/projects/active`);
-    return handleResponse(res);
+    return fetchWithRetry(`${BASE_URL}/api/v1/projects/active`);
 };
 
 export const toggleProjectActive = async (id) => {
@@ -107,8 +125,7 @@ export const reorderProjects = async (requestList) => {
 
 // --- SKILLS ---
 export const getSkills = async () => {
-    const res = await fetch(`${BASE_URL}/api/v1/skills`);
-    return handleResponse(res);
+    return fetchWithRetry(`${BASE_URL}/api/v1/skills`);
 };
 
 export const createSkill = async (skill) => {
@@ -155,8 +172,7 @@ export const deleteMessage = async (id) => {
 
 // --- EDUCATIONS ---
 export const getEducations = async () => {
-    const res = await fetch(`${BASE_URL}/api/v1/educations`);
-    return handleResponse(res);
+    return fetchWithRetry(`${BASE_URL}/api/v1/educations`);
 };
 
 export const createEducation = async (education) => {

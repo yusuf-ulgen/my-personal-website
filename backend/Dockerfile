@@ -14,4 +14,4 @@ COPY --from=build /app/target/website-*.jar app.jar
 # Render'ın sitemizle iletişim kuracağı port
 EXPOSE 8080
 # Projeyi ayağa kaldıran komut (Bellek limitleri eklenmiş)
-ENTRYPOINT ["java", "-Xmx300m", "-Xss512k", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Xmx400m", "-Xss512k", "-XX:+UseSerialGC", "-XX:MaxMetaspaceSize=128m", "-Dspring.jmx.enabled=false", "-jar", "app.jar"]
