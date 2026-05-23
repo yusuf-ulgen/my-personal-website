@@ -6,7 +6,7 @@ import myLogo from '../assets/website_logo.png';
 // import projectWeb from '../assets/project_web.png';
 // import projectTravel from '../assets/project_travel.png';
 // import projectAi from '../assets/project_ai.png';
-import { getActiveProjects, getSkills, getProfile, getEducations, sendMessage } from '../services/api';
+import { getActiveProjects, getSkills, getProfile, getEducations, getReferences, sendMessage } from '../services/api';
 
 const technologies = [
   { name: 'HTML5', icon: 'https://cdn.simpleicons.org/html5/E34F26' },
@@ -39,7 +39,7 @@ const projectMarqueeItems = [
 ];
 
 // --- ÇEVİRİ SÖZLÜĞÜ (SABİT METİNLER) ---
-const translations = { TR: { nav: { about: "Hakkımda", skills: "Yetenekler", projects: "Projeler", contact: "İletişim ↗" }, hero: { explore: "Projelerimi Keşfet", subtitle: "Geleceği Kodla, Hayatı Tasarla" }, about: { tag: "HAKKIMDA", title: "Hayal Gücünü Koda Dönüştür", archTitle: "Sistem Mimarisi", archDesc: "Güvenli ve ölçeklenebilir altyapılar", uiTitle: "UI/UX Tasarım", uiDesc: "Ziyaretçiyi müşteriye dönüştüren etkileşimler ve SEO/GEO performans çalışmaları", mobileTitle: "Mobil Uygulama Geliştirme", mobileDesc: "iOS ve Android dünyasında yüksek performanslı, native ve cross-platform çözümler", softwareTitle: "Yazılım Mühendisliği", softwareDesc: "Karmaşık problemleri çözen, sürdürülebilir ve temiz kod prensipleriyle geliştirilen sistemler" }, skills: { tag: "YETENEKLER", title: "Teknoloji Yığınım", noData: "[Henüz veri yok]" }, projects: { title: "Öne Çıkan İşlerim", inspect: "Detayları İncele →" }, contact: { tag: "İLETİŞİM", title1: "Bir fikriniz mi var?", title2: "Birlikte inşa edelim", desc: "Yeni bir proje başlatmak için doğrudan ulaşabilirsiniz", btn: "Bize Ulaşın", rights: "TÜM HAKLARI SAKLIDIR." }, modal: { devTime: "Geliştirme Süresi:", liveSite: "Canlı Site ↗", webSite: "Web Sitesi ↗", mobileApp: "Mobil Uygulama ↗", github: "GitHub ↗" } }, EN: { nav: { about: "About", skills: "Skills", projects: "Projects", contact: "Contact ↗" }, hero: { explore: "Explore My Work", subtitle: "Solutions that leave a mark in the digital world" }, about: { tag: "ABOUT ME", title: "The Perfect Harmony of Logic and Aesthetics", archTitle: "System Architecture", archDesc: "Secure, scalable, and robust infrastructures", uiTitle: "UI/UX Design", uiDesc: "Interactions that turn visitors into customers and SEO/GEO performance optimizations", mobileTitle: "Mobile App Development", mobileDesc: "High-performance native and cross-platform solutions for iOS and Android", softwareTitle: "Software Engineering", softwareDesc: "Systems developed with sustainable and clean code principles to solve complex problems" }, skills: { tag: "SKILLS", title: "My Tech Stack", noData: "[No data yet]" }, projects: { title: "Featured Work", inspect: "View Details →" }, contact: { tag: "CONTACT", title1: "Have an idea?", title2: "Let's build it together", desc: "You can reach out directly to start a new project", btn: "Contact Us", rights: "ALL RIGHTS RESERVED." }, modal: { devTime: "Development Time:", liveSite: "Live Site ↗", webSite: "Web Site ↗", mobileApp: "Mobile App ↗", github: "GitHub ↗" } } };
+const translations = { TR: { nav: { about: "Hakkımda", skills: "Yetenekler", projects: "Projeler", references: "Referanslar", contact: "İletişim ↗" }, hero: { explore: "Projelerimi Keşfet", subtitle: "Geleceği Kodla, Hayatı Tasarla" }, about: { tag: "HAKKIMDA", title: "Hayal Gücünü Koda Dönüştür", archTitle: "Sistem Mimarisi", archDesc: "Güvenli ve ölçeklenebilir altyapılar", uiTitle: "UI/UX Tasarım", uiDesc: "Ziyaretçiyi müşteriye dönüştüren etkileşimler ve SEO/GEO performans çalışmaları", mobileTitle: "Mobil Uygulama Geliştirme", mobileDesc: "iOS ve Android dünyasında yüksek performanslı, native ve cross-platform çözümler", softwareTitle: "Yazılım Mühendisliği", softwareDesc: "Karmaşık problemleri çözen, sürdürülebilir ve temiz kod prensipleriyle geliştirilen sistemler" }, skills: { tag: "YETENEKLER", title: "Teknoloji Yığınım", noData: "[Henüz veri yok]" }, projects: { title: "Öne Çıkan İşlerim", inspect: "Detayları İncele →" }, references: { tag: "REFERANSLAR", title: "Birlikte Çalıştığım İnsanlar", noData: "[Henüz referans eklenmemiş]" }, contact: { tag: "İLETİŞİM", title1: "Bir fikriniz mi var?", title2: "Birlikte inşa edelim", desc: "Yeni bir proje başlatmak için doğrudan ulaşabilirsiniz", btn: "Bize Ulaşın", rights: "TÜM HAKLARI SAKLIDIR." }, modal: { devTime: "Geliştirme Süresi:", liveSite: "Canlı Site ↗", webSite: "Web Sitesi ↗", mobileApp: "Mobil Uygulama ↗", github: "GitHub ↗" } }, EN: { nav: { about: "About", skills: "Skills", projects: "Projects", references: "References", contact: "Contact ↗" }, hero: { explore: "Explore My Work", subtitle: "Solutions that leave a mark in the digital world" }, about: { tag: "ABOUT ME", title: "The Perfect Harmony of Logic and Aesthetics", archTitle: "System Architecture", archDesc: "Secure, scalable, and robust infrastructures", uiTitle: "UI/UX Design", uiDesc: "Interactions that turn visitors into customers and SEO/GEO performance optimizations", mobileTitle: "Mobile App Development", mobileDesc: "High-performance native and cross-platform solutions for iOS and Android", softwareTitle: "Software Engineering", softwareDesc: "Systems developed with sustainable and clean code principles to solve complex problems" }, skills: { tag: "SKILLS", title: "My Tech Stack", noData: "[No data yet]" }, projects: { title: "Featured Work", inspect: "View Details →" }, references: { tag: "REFERENCES", title: "People I've Worked With", noData: "[No references yet]" }, contact: { tag: "CONTACT", title1: "Have an idea?", title2: "Let's build it together", desc: "You can reach out directly to start a new project", btn: "Contact Us", rights: "ALL RIGHTS RESERVED." }, modal: { devTime: "Development Time:", liveSite: "Live Site ↗", webSite: "Web Site ↗", mobileApp: "Mobile App ↗", github: "GitHub ↗" } } };
 
 function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -53,6 +53,7 @@ function Home() {
   const [skills, setSkills] = useState([]);
   const [profile, setProfile] = useState(null);
   const [educations, setEducations] = useState([]);
+  const [references, setReferences] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState('top');
   const [contactForm, setContactForm] = useState({ senderName: '', senderEmail: '', subject: '', content: '' });
@@ -79,8 +80,8 @@ function Home() {
   useEffect(() => {
     const fetchAllData = async () => {
       try {
-        const [projResult, skillResult, profResult, eduResult] = await Promise.allSettled([
-          getActiveProjects(), getSkills(), getProfile(), getEducations()
+        const [projResult, skillResult, profResult, eduResult, refResult] = await Promise.allSettled([
+          getActiveProjects(), getSkills(), getProfile(), getEducations(), getReferences()
         ]);
         if (projResult.status === 'fulfilled' && projResult.value.success) setProjects(projResult.value.data);
         if (skillResult.status === 'fulfilled' && skillResult.value.success) setSkills(skillResult.value.data);
@@ -88,6 +89,10 @@ function Home() {
         if (eduResult.status === 'fulfilled' && eduResult.value.success) {
           const sortedEdu = eduResult.value.data.sort((a, b) => (a.orderIndex || 0) - (b.orderIndex || 0));
           setEducations(sortedEdu);
+        }
+        if (refResult.status === 'fulfilled' && refResult.value.success) {
+          const sortedRef = refResult.value.data.sort((a, b) => (a.orderIndex || 0) - (b.orderIndex || 0));
+          setReferences(sortedRef);
         }
         setIsLoading(false);
       } catch (error) {
@@ -100,7 +105,7 @@ function Home() {
 
   // --- Aktif bölüm takibi (IntersectionObserver) ---
   useEffect(() => {
-    const sections = ['about', 'skills', 'projects', 'contact'];
+    const sections = ['about', 'skills', 'projects', 'references', 'contact'];
     const observers = [];
     sections.forEach(id => {
       const el = document.getElementById(id);
@@ -186,7 +191,7 @@ function Home() {
             </a>
 
             <div className="hidden md:flex items-center space-x-10">
-              {[['about', t.nav.about], ['skills', t.nav.skills], ['projects', t.nav.projects]].map(([id, label]) => (
+              {[['about', t.nav.about], ['skills', t.nav.skills], ['projects', t.nav.projects], ['references', t.nav.references]].map(([id, label]) => (
                 <a key={id} href={`#${id}`} onClick={(e) => handleSmoothScroll(e, id)}
                   className={`text-sm font-medium transition-colors cursor-pointer relative pb-0.5 ${activeSection === id ? 'text-white after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-[#8b5cf6]' : 'text-[#8c8496] hover:text-white'
                     }`}>
@@ -472,6 +477,65 @@ function Home() {
                     </p>
                   )}
                 </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <SectionDivider />
+
+      {/* REFERANSLAR SECTION */}
+      {references.length > 0 && (
+        <section id="references" className="relative z-10 max-w-7xl mx-auto px-6 py-24">
+          <div className="mb-16">
+            <h2 className="text-xs font-mono text-[#7a7085] tracking-[0.3em] mb-4 flex items-center gap-4">
+              {t.references.tag} <span className="w-12 h-[1px] bg-[#7a7085]"></span>
+            </h2>
+            <h3 className="text-3xl md:text-5xl font-extrabold tracking-tighter text-[#F8F7F9]">
+              {t.references.title}
+            </h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {references.map((refItem) => (
+              <div key={refItem.id} className="bg-white/[0.02] border border-white/5 p-8 rounded-3xl hover:border-[#8b5cf6]/30 transition-all duration-500 hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#8b5cf6] to-[#d946ef] flex items-center justify-center font-bold text-white text-sm shadow-[0_0_15px_rgba(139,92,246,0.3)] shrink-0">
+                      {refItem.fullName ? refItem.fullName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'RF'}
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-bold text-[#F8F7F9] leading-tight">{refItem.fullName}</h4>
+                      <p className="text-xs text-[#8b5cf6] font-medium mt-0.5">
+                        {lang === 'EN' && refItem.titleEn ? refItem.titleEn : refItem.title}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-[#928b9c] text-sm font-light mb-6 flex items-start gap-2">
+                    <span className="text-[#8b5cf6]">🏢</span>
+                    <span>
+                      {lang === 'EN' && refItem.companyEn ? refItem.companyEn : refItem.company}
+                      {refItem.city && <span className="text-[#7a7085] ml-1">({refItem.city})</span>}
+                    </span>
+                  </p>
+                </div>
+                
+                {(refItem.email || refItem.phone) && (
+                  <div className="border-t border-white/5 pt-4 mt-auto flex flex-col gap-2 text-xs text-[#7a7085]">
+                    {refItem.email && (
+                      <a href={`mailto:${refItem.email}`} className="hover:text-white transition-colors flex items-center gap-2">
+                        <span>✉</span>
+                        <span>{refItem.email}</span>
+                      </a>
+                    )}
+                    {refItem.phone && (
+                      <a href={`tel:${refItem.phone}`} className="hover:text-white transition-colors flex items-center gap-2">
+                        <span>📞</span>
+                        <span>{refItem.phone}</span>
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
             ))}
           </div>

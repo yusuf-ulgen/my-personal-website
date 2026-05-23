@@ -210,3 +210,43 @@ export const reorderEducations = async (requestList) => {
     return handleResponse(res);
 };
 
+// --- REFERENCES ---
+export const getReferences = async () => {
+    return fetchWithRetry(`${BASE_URL}/api/v1/references`);
+};
+
+export const createReference = async (reference) => {
+    const res = await fetch(`${BASE_URL}/api/v1/references`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify(reference),
+    });
+    return handleResponse(res);
+};
+
+export const updateReference = async (id, reference) => {
+    const res = await fetch(`${BASE_URL}/api/v1/references/${id}`, {
+        method: 'PUT',
+        headers: getAuthHeaders(),
+        body: JSON.stringify(reference),
+    });
+    return handleResponse(res);
+};
+
+export const deleteReference = async (id) => {
+    const res = await fetch(`${BASE_URL}/api/v1/references/${id}`, {
+        method: 'DELETE',
+        headers: getAuthHeaders(),
+    });
+    return handleResponse(res);
+};
+
+export const reorderReferences = async (requestList) => {
+    const res = await fetch(`${BASE_URL}/api/v1/references/reorder`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify(requestList),
+    });
+    return handleResponse(res);
+};
+

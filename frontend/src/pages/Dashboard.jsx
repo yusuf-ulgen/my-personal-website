@@ -5,7 +5,8 @@ import {
   getSkills, createSkill, deleteSkill,
   getMessages, deleteMessage,
   getProfile, saveProfile,
-  getEducations, createEducation, updateEducation, deleteEducation, reorderEducations
+  getEducations, createEducation, updateEducation, deleteEducation, reorderEducations,
+  getReferences, createReference, updateReference, deleteReference, reorderReferences
 } from '../services/api';
 
 function Dashboard() {
@@ -16,6 +17,7 @@ function Dashboard() {
   const [skills, setSkills] = useState([]);
   const [messages, setMessages] = useState([]);
   const [educations, setEducations] = useState([]);
+  const [references, setReferences] = useState([]);
   const [profile, setProfile] = useState({ fullName: '', title: '', titleEn: '', bio: '', bioEn: '', email: '', githubLink: '', linkedinLink: '' });
 
   const [newProject, setNewProject] = useState({ title: '', titleEn: '', description: '', descriptionEn: '', technologies: '', duration: '', githubUrl: '', liveUrl: '', webUrl: '', mobileUrl: '' });
@@ -25,6 +27,9 @@ function Dashboard() {
   const [newEducation, setNewEducation] = useState({ schoolName: '', schoolNameEn: '', department: '', departmentEn: '', startDate: '', endDate: '', description: '', descriptionEn: '', educationType: 'Üniversite', orderIndex: 0 });
   const [editingEducationId, setEditingEducationId] = useState(null);
   const [isEducationContinuing, setIsEducationContinuing] = useState(false);
+
+  const [newReference, setNewReference] = useState({ fullName: '', title: '', titleEn: '', company: '', companyEn: '', city: '', email: '', phone: '', orderIndex: 0 });
+  const [editingReferenceId, setEditingReferenceId] = useState(null);
 
   const dragItem = useRef();
   const dragOverItem = useRef();
@@ -42,6 +47,9 @@ function Dashboard() {
   const loadEducations = useCallback(async () => {
     try { const d = await getEducations(); if (d.success) setEducations(d.data.sort((a, b) => (a.orderIndex || 0) - (b.orderIndex || 0))); } catch (e) { console.error(e); }
   }, []);
+  const loadReferences = useCallback(async () => {
+    try { const d = await getReferences(); if (d.success) setReferences(d.data.sort((a, b) => (a.orderIndex || 0) - (b.orderIndex || 0))); } catch (e) { console.error(e); }
+  }, []);
   const loadProfile = useCallback(async () => {
     try {
       const d = await getProfile();
@@ -52,8 +60,8 @@ function Dashboard() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token || token === 'null') { navigate('/login'); return; }
-    loadProjects(); loadSkills(); loadMessages(); loadEducations(); loadProfile();
-  }, [navigate, loadProjects, loadSkills, loadMessages, loadEducations, loadProfile]);
+    loadProjects(); loadSkills(); loadMessages(); loadEducations(); loadProfile(); loadReferences();
+  }, [navigate, loadProjects, loadSkills, loadMessages, loadEducations, loadProfile, loadReferences]);
 
   // --- İşlemler ---
   const handleAddProject = async (e) => {
@@ -166,6 +174,54 @@ function Dashboard() {
     }
   };
 
+  const handleAddReference = async (e) => {
+    e.preventDefault();
+    if (!newReference.fullName?.trim() || !newReference.title?.trim() || !newReference.company?.trim()) {
+      return alert('Hata: İsim soyisim, Görev ve Şirket alanları zorunludur!');
+    }
+    try {
+      if (editingReferenceId) {
+        await updateReference(editingReferenceId, newReference);
+        alert('Referans başarıyla güncellendi! ✨');
+      } else {
+        await createReference({ ...newReference, orderIndex: references.length });
+        alert('Referans başarıyla eklendi! ✨');
+      }
+      setNewReference({ fullName: '', title: '', titleEn: '', company: '', companyEn: '', city: '', email: '', phone: '', orderIndex: 0 });
+      setEditingReferenceId(null);
+      await loadReferences();
+    } catch (err) { alert(`Hata: ${err.message}`); }
+  };
+
+  const handleEditReference = (refItem) => {
+    setNewReference({ ...refItem });
+    setEditingReferenceId(refItem.id);
+    document.querySelector('.flex-1.p-12').scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleDeleteReference = async (id) => {
+    if (!window.confirm('Referansı silmek istiyor musun?')) return;
+    try { await deleteReference(id); await loadReferences(); } catch (err) { alert(`Hata: ${err.message}`); }
+  };
+
+  const handleSortReferences = async () => {
+    const _references = [...references];
+    const draggedItemContent = _references.splice(dragItem.current, 1)[0];
+    _references.splice(dragOverItem.current, 0, draggedItemContent);
+    dragItem.current = null;
+    dragOverItem.current = null;
+
+    const updatedReferences = _references.map((r, i) => ({ ...r, orderIndex: i }));
+    setReferences(updatedReferences);
+
+    const requestList = updatedReferences.map(r => ({ id: r.id, orderIndex: r.orderIndex }));
+    try {
+      await reorderReferences(requestList);
+    } catch (err) {
+      alert(`Sıralama güncellenemedi: ${err.message}`);
+    }
+  };
+
   const handleDeleteMessage = async (id) => {
     if (!window.confirm('Mesajı silmek istiyor musun?')) return;
     try { await deleteMessage(id); await loadMessages(); } catch (err) { alert(`Hata: ${err.message}`); }
@@ -181,6 +237,7 @@ function Dashboard() {
     { id: 'projects', label: '📁 Projeler' },
     { id: 'skills', label: '⚡ Yetenekler' },
     { id: 'education', label: '🎓 Eğitim' },
+    { id: 'references', label: '👥 Referanslar' },
     { id: 'messages', label: '📩 Mesajlar' },
     { id: 'profile', label: '👤 Profil' },
   ];
@@ -360,6 +417,73 @@ function Dashboard() {
                       <div className="flex gap-4 ml-4">
                         <button onClick={() => handleEditEducation(ed)} className="text-blue-500 text-xs opacity-0 group-hover:opacity-100 transition-all hover:underline">DÜZENLE</button>
                         <button onClick={() => handleDeleteEducation(ed.id)} className="text-red-500 text-xs opacity-0 group-hover:opacity-100 transition-all hover:underline">SİL</button>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        )}
+
+        {/* REFERANSLAR */}
+        {activeTab === 'references' && (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 animate-[fadeInUp_0.4s_ease-out]">
+            <div className="lg:col-span-1 bg-white/[0.02] border border-white/10 p-8 rounded-3xl h-fit shadow-xl">
+              <h2 className="text-lg font-bold mb-6 italic">{editingReferenceId ? 'Referansı Düzenle' : 'Yeni Referans Ekle'}</h2>
+              <form onSubmit={handleAddReference} className="space-y-3">
+                <input className={inputCls} placeholder="İsim Soyisim" value={newReference.fullName || ''} onChange={e => setNewReference({ ...newReference, fullName: e.target.value })} required />
+                
+                <div className="grid grid-cols-2 gap-2">
+                  <input className={inputCls} placeholder="Görevi / Unvanı (TR)" value={newReference.title || ''} onChange={e => setNewReference({ ...newReference, title: e.target.value })} required />
+                  <input className={inputCls} placeholder="Görevi / Unvanı (EN)" value={newReference.titleEn || ''} onChange={e => setNewReference({ ...newReference, titleEn: e.target.value })} />
+                </div>
+                
+                <div className="grid grid-cols-2 gap-2">
+                  <input className={inputCls} placeholder="Şirket Adı (TR)" value={newReference.company || ''} onChange={e => setNewReference({ ...newReference, company: e.target.value })} required />
+                  <input className={inputCls} placeholder="Şirket Adı (EN)" value={newReference.companyEn || ''} onChange={e => setNewReference({ ...newReference, companyEn: e.target.value })} />
+                </div>
+                
+                <input className={inputCls} placeholder="Şirketin Şehri" value={newReference.city || ''} onChange={e => setNewReference({ ...newReference, city: e.target.value })} />
+                <input type="email" className={inputCls} placeholder="E-Posta Adresi" value={newReference.email || ''} onChange={e => setNewReference({ ...newReference, email: e.target.value })} />
+                <input type="tel" className={inputCls} placeholder="Telefon Numarası" value={newReference.phone || ''} onChange={e => setNewReference({ ...newReference, phone: e.target.value })} />
+                
+                <button type="submit" className="w-full bg-[#8b5cf6] py-4 rounded-xl font-bold hover:scale-[1.01] transition-all">
+                  {editingReferenceId ? 'Referansı Güncelle' : 'Referansı Kaydet'}
+                </button>
+                {editingReferenceId && (
+                  <button type="button" onClick={() => { setEditingReferenceId(null); setNewReference({ fullName: '', title: '', titleEn: '', company: '', companyEn: '', city: '', email: '', phone: '', orderIndex: 0 }); }} className="w-full bg-white/10 py-4 rounded-xl font-bold hover:scale-[1.01] transition-all mt-2">İptal Et</button>
+                )}
+              </form>
+            </div>
+            
+            <div className="lg:col-span-2 space-y-4">
+              <h2 className="text-lg font-bold mb-4 italic">Referanslar ({references.length})</h2>
+              {references.length === 0 ? <p className="text-[#50455e]">Henüz referans eklenmemiş.</p> :
+                references.map((refItem, index) => (
+                  <div key={refItem.id} 
+                       draggable
+                       onDragStart={() => (dragItem.current = index)}
+                       onDragEnter={() => (dragOverItem.current = index)}
+                       onDragEnd={handleSortReferences}
+                       onDragOver={(e) => e.preventDefault()}
+                       className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl relative group hover:border-white/20 transition-all border-l-2 border-l-[#8b5cf6] cursor-grab active:cursor-grabbing">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h3 className="font-bold text-[#F8F7F9]">{refItem.fullName}</h3>
+                        <p className="text-sm text-[#928b9c] font-medium">{refItem.title} {refItem.titleEn && <span className="text-xs text-[#7a7085] italic">({refItem.titleEn})</span>}</p>
+                        <p className="text-xs text-[#8b5cf6] mt-1">{refItem.company} {refItem.companyEn && <span className="text-[10px] text-[#7a7085] italic">({refItem.companyEn})</span>} {refItem.city && `— ${refItem.city}`}</p>
+                        
+                        {(refItem.email || refItem.phone) && (
+                          <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3 text-xs text-[#7a7085]">
+                            {refItem.email && <span className="flex items-center gap-1">✉ {refItem.email}</span>}
+                            {refItem.phone && <span className="flex items-center gap-1">📞 {refItem.phone}</span>}
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex gap-4 ml-4">
+                        <button onClick={() => handleEditReference(refItem)} className="text-blue-500 text-xs opacity-0 group-hover:opacity-100 transition-all hover:underline">DÜZENLE</button>
+                        <button onClick={() => handleDeleteReference(refItem.id)} className="text-red-500 text-xs opacity-0 group-hover:opacity-100 transition-all hover:underline">SİL</button>
                       </div>
                     </div>
                   </div>
